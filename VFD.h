@@ -11,10 +11,10 @@ public:
 	void on(int duration);
 	void off(int duration);
 	void blink(int duration);
-	void number(int d, int num);
+	void number(int g, int num);
 	void multiDigitNumber(int num);
-	void segment(int d, int s);
-	void segment(int d, int s, int duration);
+	void segment(int g, int s);
+	void segment(int g, int s, int duration);
 	void crazyEights(int speed);
 private:
 	int _numSegPins;
