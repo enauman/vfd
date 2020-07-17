@@ -10,7 +10,7 @@ VFDs can be found in common discarded appliances such as microwaves and DVD/VCR 
   </code>
   <br />
   <b>Create the display instance</b><br />
-Because displays vary in their number of grids for multiplexing and segments in each digit this data is passed to the instance through grid and segment pin arrays. Before creating these arrays follow <a href="https://slomkowski.eu/tutorials/determining-the-pinout-of-the-unknown-vacuum-fluorescent-display/" target="_blank">this tutorial</a> to set up the power circuit to determine grid and segment pins. Constructing a pinout diagram will help to map out which pins control each grid, and which pins control the segments.<br />
+Because displays vary in their number of grids for multiplexing and segments in each digit this data is passed to the instance through grid and segment pin arrays. Before creating these arrays follow <a href="https://slomkowski.eu/tutorials/determining-the-pinout-of-the-unknown-vacuum-fluorescent-display/" target="_blank">this tutorial</a> to set up a power circuit to determine grid and segment pins. Constructing a pinout diagram will help to map out which pins control each grid, and which pins control the segments.<br />
 Now create the digit and segment data that will be passed to the object instance, as in this example:<br />
   <img src="7segvfd.jpeg" width="400"><br />
   This dislay is only slightly non-standard because of the additional segments for the colon, and the lines above and below the digits.
