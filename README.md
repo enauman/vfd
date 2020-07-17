@@ -1,4 +1,4 @@
-# vfd
+# VFD
 Arduino library for vacuum fluorescent displaysd, such as found in electronics and appliances.<br />
 With this library I am trying to provide some shortcuts to programming any vacuum fluorescent appliance/electronics display provided it is multiplexed, that is, its circuit has several grid pins to address specific digits with individual pins for segments across digits. 
 ## Where to get them
