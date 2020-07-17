@@ -71,7 +71,7 @@ void VFD::off(int duration)
   delay(duration);
 }
 
-void VFD::number(int d, int num) {
+void VFD::number(int g, int num) {
   for (int i = 0; i < 7; i++) {
     digitalWrite(_segPins[i], numbers[num][i]);
   }
