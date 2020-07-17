@@ -38,9 +38,9 @@ Now create the digit and segment data that will be passed to the object instance
   <code>disp.on(int duration)</code>: all segments on, multiplexed across all grids for even power distribution.<br />
 	<code>disp.off(int duration)</code>; all digits and segments set against LED bias<br />
 	<code>disp.blink(int duration)</code>; alternates on and off for duration passed as argument<br />
-	<code>disp.segment(int d, int s)</code>; Turn on segment specified (but does not turn it off).<br />
-	<code>disp.segment(int d, int s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
-	<code>disp.number(int d, int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
+	<code>disp.segment(int g, int s)</code>; Turn on segment specified (but does not turn it off).<br />
+	<code>disp.segment(int g, int s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
+	<code>disp.number(int g, int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
 	<code>disp.multiDigitNumber(int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) and digits are sequenced right to left, will display integers up to 99999, right justified. Multiplexed, 5 ms per digit. Note this can only work if the digit grids are adjacent. In the above example VFD the colon grid messes up 3- or more digit numbers.<br />
 	<code>disp.crazyEights(int speed)</code>; Run an 8 pattern of segments on all digits, if segments are sequenced according to conventional number segment mapping (see above).
   ## Multiplexing different elements
