@@ -1,0 +1,8 @@
+VFD				   	KEYWORD1
+on	    			KEYWORD2
+off     			KEYWORD2
+blink				KEYWORD2
+number				KEYWORD2
+multiDigitNumber	KEYWORD2
+segment				KEYWORD2
+crazyEights			KEYWORD2
