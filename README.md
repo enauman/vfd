@@ -44,7 +44,7 @@ Now create the digit and segment data that will be passed to the object instance
 	<code>disp.multiDigitNumber(int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) and digits are sequenced right to left, will display integers up to 99999, right justified. Multiplexed, 5 ms per digit. Note this can only work if the digit grids are adjacent. In the above example VFD the colon grid messes up 3- or more digit numbers.<br />
 	<code>disp.crazyEights(int speed)</code>; Run an 8 pattern of segments on all digits, if segments are sequenced according to conventional number segment mapping (see above).
   ## Multiplexing different elements
-  Let's say you want different multiplexed elements to alternate, like a multi-digit number to blink. You can't use a delay because the current element will be blocked at it's last multiplexed item. My solution is to use a state variable that changes via a timer condition:
+  Let's say you want different multiplexed elements to alternate, like a multi-digit number to blink. You can't use a delay because the current element will be blocked at its last multiplexed state. My solution is to use a state variable that changes via a timer condition:
   <pre>
 byte state = 0;
 int delayTime = 500;
