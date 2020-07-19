@@ -7,6 +7,7 @@ class VFD
 {
 
 public:
+	VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins, const int segsForNumbers);
 	VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins);
 	void on(int duration);
 	void off(int duration);
@@ -21,7 +22,8 @@ private:
 	const int * _segPins;
 	int _numGridPins;
 	const int * _gridPins;
-	const int numbers[10][7] = {
+	int _segsForNumbers;
+	const int numbers7[10][7] = {
 	  {0, 0, 0, 0, 0, 0, 1},//0
 	  {1, 0, 0, 1, 1, 1, 1},//1
 	  {0, 0, 1, 0, 0, 1, 0},//2
@@ -32,6 +34,18 @@ private:
 	  {0, 0, 0, 1, 1, 1, 1},//7
 	  {0, 0, 0, 0, 0, 0, 0},//8
 	  {0, 0, 0, 0, 1, 0, 0}//9
+	};
+	const int numbers9[10][9] = {
+	  {0, 0, 0, 0, 0, 0, 1, 1, 1},//0
+	  {1, 0, 0, 1, 1, 1, 1, 1, 1},//1
+	  {0, 0, 1, 0, 0, 1, 0, 0, 0},//2
+	  {0, 0, 0, 0, 1, 1, 1, 0, 0},//3
+	  {1, 0, 0, 1, 1, 0, 0, 0, 0},//4
+	  {0, 1, 0, 0, 1, 0, 0, 0, 0},//5
+	  {0, 1, 0, 0, 0, 0, 0, 0, 0},//6
+	  {0, 0, 0, 1, 1, 1, 1, 1, 1},//7
+	  {0, 0, 0, 0, 0, 0, 0, 0, 0},//8
+	  {0, 0, 0, 0, 1, 0, 0, 0, 0}//9
 	};
 };
 
