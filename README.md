@@ -72,7 +72,7 @@ void setup() {}
 
 void loop() {
 if (state == 0) {
-    disp.multiDigitNumber(12345);
+    disp.multiDigitNumber(123);
   } else {
     disp.off(0);
   }
