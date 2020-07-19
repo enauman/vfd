@@ -47,6 +47,9 @@ As with 7-segment configuration, first 9 pins in the segment pins array should b
   E     C<br />
      D
      </pre>
+ If no 5th argument is given the display object defaults to a 7-segment number configuration, but you can also add 7 as a 5th argument:<br />
+ <pre>const int numberSegments = 7; 
+VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br />
 Alphabet support is coming for this type of display as well!
 	
   ## Useful functions (so far)
