@@ -67,17 +67,18 @@ Alphabet support is coming for this type of display as well!
 byte state = 0;
 int delayTime = 500;
 double lastChange = 0;
+
+void setup() {}
+
 void loop() {
-  if (state == 0) {
-    disp.multiDigitNumber(365);
-  } else if (state == 1) {
-    disp.on(20);
+if (state == 0) {
+    disp.multiDigitNumber(12345);
   } else {
     disp.off(0);
   }
   if (millis() > lastChange + delayTime) {
-    state++;
-    if(state > 2) state = 0;
+    state = !state;
     lastChange = millis();
   }
+}
 }</pre>
