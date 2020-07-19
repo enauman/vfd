@@ -37,9 +37,9 @@ Now create the digit and segment data that will be passed to the object instance
 ## 9-segment numbers option
 <p>When you create the display object you can add a 5th argument for numbers to use 9 segments as with this type of display:</p>
 <img src="images/IMG_6037.jpg" width="400"><br />
-<code>const int numberSegments = 9; <br />
-VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</code><br />
-As will 7-segment configuration, first 9 pins in the segment pins array should be in the following order:<br />
+<pre>const int numberSegments = 9; 
+VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br />
+As with 7-segment configuration, first 9 pins in the segment pins array should be in the following order:<br />
   <pre>
      A<br />
   F     B<br />
