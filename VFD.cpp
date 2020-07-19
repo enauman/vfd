@@ -2,15 +2,23 @@
 #include "VFD.h"
 /*
 Create instance of display, arguments:
-2) number of segment pins
-3) array of segment pins, first 7 in conventional order (A-F) for number segments if numbers wanted
+1) number of segment pins
+2) array of segment pins, first 7 or 9 (see documentation) in conventional order (A-G) or (A-I) 
+ for number segments if numbers wanted:
 *   A
 * F   B
 *   G
 * E   C
 *   D 
-4) number of grid pins
-5) array of grid pins, rightmost digit first
+*********
+*   A
+* F   B
+*  GHI
+* E   C
+*   D 
+3) number of grid pins
+4) array of grid pins, rightmost digit first
+5) (optional) number of segments to be used for numbers (7 or 9)
 */
 VFD::VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins)
 {
@@ -18,6 +26,23 @@ VFD::VFD(const int numSegPins, const int * segPins,const int numGridPins, const 
   _segPins = segPins;
   _numGridPins = numGridPins;
   _gridPins = gridPins;
+  _segsForNumbers = 7;
+  for(int i = 0; i<_numSegPins; i++) {
+    pinMode(_segPins[i],OUTPUT);
+  }
+  for(int i = 0; i<_numGridPins; i++) {
+    pinMode(_gridPins[i],OUTPUT);
+  }
+  off(0);
+}
+
+VFD::VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins, const int segsForNumbers)
+{
+  _numSegPins = numSegPins;
+  _segPins = segPins;
+  _numGridPins = numGridPins;
+  _gridPins = gridPins;
+  _segsForNumbers = segsForNumbers;
   for(int i = 0; i<_numSegPins; i++) {
     pinMode(_segPins[i],OUTPUT);
   }
@@ -71,9 +96,13 @@ void VFD::off(int duration)
   delay(duration);
 }
 
-void VFD::number(int g, int num) {
-  for (int i = 0; i < 7; i++) {
-    digitalWrite(_segPins[i], numbers[num][i]);
+void VFD::number(int d, int num) {
+  for (int i = 0; i < _segsForNumbers; i++) {
+    if(_segsForNumbers == 9) {
+      digitalWrite(_segPins[i], numbers9[num][i]);
+    } else {
+      digitalWrite(_segPins[i], numbers7[num][i]);
+    }
   }
   for (int j = 0; j < _numGridPins; j++) {
     if (j == d) {
@@ -82,7 +111,7 @@ void VFD::number(int g, int num) {
       digitalWrite(_gridPins[j], HIGH);
     }
   }
-  delay(5);
+  delay(3);
 }
 
 void VFD::multiDigitNumber(int num) {
@@ -144,12 +173,23 @@ void VFD::multiDigitNumber(int num) {
 }
 
 void VFD::crazyEights(int speed) {
-  int segs[] = {0, 1, 6, 4, 3, 2, 6, 5};
-  for (int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
-    for(int j = 0; j < _numGridPins; j++) {
-      segment(j, segs[i]);
+  if(_segsForNumbers == 9) {
+    int segs[] = {0, 1, 8, 7, 6, 4, 3, 2, 8, 7, 6, 5};
+    for (int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+      for(int j = 0; j < _numGridPins; j++) {
+        segment(j, segs[i]);
+      }
+      delay(speed);
+      off(1);   
+    }   
+  } else {
+    int segs[] = {0, 1, 6, 4, 3, 2, 6, 5};
+    for (int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+      for(int j = 0; j < _numGridPins; j++) {
+        segment(j, segs[i]);
+      }
+      delay(speed);
+      off(1);   
     }
-    delay(speed);
-    off(1);   
   }
 }
