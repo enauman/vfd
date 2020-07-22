@@ -17,8 +17,8 @@ Create instance of display, arguments:
 * E   C
 *   D 
 *********
-* With star-type digit (15 segment) you can use letter and message functions,
-* order segment pin array in this order:
+* With star-type digit (15 segment) you can use letter, message, and scrollingMessage
+* functions, order segment pin array in this order:
 *   A
 * FJKLB
 *  GHI
