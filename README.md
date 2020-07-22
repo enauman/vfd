@@ -50,6 +50,7 @@ As with 7-segment configuration, first 9 pins in the segment pins array should b
  If no 5th argument is given the display object defaults to a 7-segment number configuration, but you can also add 7 as a 5th argument:<br />
  <pre>const int numberSegments = 7; 
 VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br />
+
 ## Alphanumeric characters for "star", or 15-segment digits
 <img src="images/IMG_6040.JPG" width="400"><br />
 With segments in the above arrangement you can display alphanumeric messages using the letter, message, and scrollingMessage functions. To do so, order the first 15 pins in the segments array in this order:<br />
