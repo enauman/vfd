@@ -55,14 +55,14 @@ VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br
 <img src="images/IMG_6040.JPG" width="400"><br />
 With segments in the above arrangement you can display alphanumeric messages using the letter, message, and scrollingMessage functions. To do so, order the first 15 pins in the segments array in this order:<br />
 <pre>
-   A<br />
- FJKLB<br />
-  GHI<br />
- EMNOC<br />
-   D <br />
+     A<br />
+ F J K L B<br />
+   G H I<br />
+ E M N O C<br />
+     D
    </pre>
 	
-  ## Useful functions (so far)
+  ## Useful functions
   <code>disp.on(int duration)</code>: all segments on, multiplexed across all grids for even power distribution.<br />
 	<code>disp.off(int duration)</code>; all digits and segments set against LED bias<br />
 	<code>disp.blink(int duration)</code>; alternates on and off for duration passed as argument<br />
@@ -70,7 +70,11 @@ With segments in the above arrangement you can display alphanumeric messages usi
 	<code>disp.segment(int g, int s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
 	<code>disp.number(int g, int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
 	<code>disp.multiDigitNumber(int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) and digits are sequenced right to left, will display integers up to 99999, right justified. Multiplexed, 5 ms per digit. Note this can only work if the digit grids are adjacent. In the above example VFD the colon grid messes up 3- or more digit numbers.<br />
-	<code>disp.crazyEights(int speed)</code>; Run an 8 pattern of segments on all digits, if segments are sequenced according to conventional number segment mapping (see above). This will work on the 9-segment number display option mentioned above as well if you add '9' as the 5th argument to the display object instance.
+	<code>disp.crazyEights(int speed)</code>; Run an 8 pattern of segments on all digits, if segments are sequenced according to conventional number segment mapping (see above). This will work on the 9-segment number display option mentioned above as well if you add '9' as the 5th argument to the display object instance.<br />
+	<code>disp.letter(int g, char whichLetter)</code>; Display a letter, a-z, in grid specified. All letters displayed as upper case.<br />
+	<code>disp.message(String text, byte firstGrid, byte lastGrid, int waitTime)</code>; Display a string comprised of a-z and 0-9, overflow characters will be separated into substrings which will alternate blinking pattern, blinking speed defined with waitTime. Required firstGrid and lastGrid args define grid range (right and left), inclusive, to use.<br />
+	<code>disp.scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime)</code>; Display a string comprised of a-z and 0-9, scrolling right to left, scrolling speed defined with waitTime. Required firstGrid and lastGrid args define grid range (right and left), inclusive, to use.<br />
+	
   ## Multiplexing different elements
   Let's say you want different multiplexed elements to alternate, like a multi-digit number to blink. You can't use a delay because the current element will be blocked at its last multiplexed state. My solution is to use a state variable that changes via a timer condition:
   <pre>
