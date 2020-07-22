@@ -16,6 +16,14 @@ Create instance of display, arguments:
 *  GHI
 * E   C
 *   D 
+*********
+* With star-type digit (15 segment) you can use letter and message functions,
+* order segment pin array in this order:
+*   A
+* FJKLB
+*  GHI
+* EMNOC
+*   D 
 3) number of grid pins
 4) array of grid pins, rightmost digit first
 5) (optional) number of segments to be used for numbers (7 or 9)
@@ -111,7 +119,7 @@ void VFD::number(int d, int num) {
       digitalWrite(_gridPins[j], HIGH);
     }
   }
-  delay(3);
+  delay(5);
 }
 
 void VFD::multiDigitNumber(int num) {
@@ -175,7 +183,7 @@ void VFD::multiDigitNumber(int num) {
 void VFD::crazyEights(int speed) {
   if(_segsForNumbers == 9) {
     int segs[] = {0, 1, 8, 7, 6, 4, 3, 2, 8, 7, 6, 5};
-    for (int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+    for (unsigned int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
       for(int j = 0; j < _numGridPins; j++) {
         segment(j, segs[i]);
       }
@@ -184,7 +192,7 @@ void VFD::crazyEights(int speed) {
     }   
   } else {
     int segs[] = {0, 1, 6, 4, 3, 2, 6, 5};
-    for (int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+    for (unsigned int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
       for(int j = 0; j < _numGridPins; j++) {
         segment(j, segs[i]);
       }
@@ -192,4 +200,163 @@ void VFD::crazyEights(int speed) {
       off(1);   
     }
   }
+}
+
+void VFD::message(String text, byte firstGrid, byte lastGrid, int waitTime) {
+  int len = text.length();
+  int multiplier = lastGrid - firstGrid;
+  if (millis() > lastTime + waitTime) {
+    messageFragment++;
+    lastTime = millis();
+  }
+  if (messageFragment * multiplier >= len) messageFragment = 0;
+  messageSegment(text.substring(messageFragment * multiplier, messageFragment * multiplier + multiplier), firstGrid, lastGrid);
+}
+
+void VFD::scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime) {
+  String newText = "       " + text;
+  int len = newText.length();
+  if (millis() > lastTime + waitTime / (lastGrid - firstGrid)) {
+    messageFragment++;
+    lastTime = millis();
+  }
+  if (messageFragment > len) messageFragment = 0;
+  messageSegment(newText.substring(messageFragment, messageFragment + (lastGrid - firstGrid)), firstGrid, lastGrid);
+}
+
+void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
+  for(int i = firstGrid; i < lastGrid; i++) {
+    letter(lastGrid - 1 - i, mesg[i]);
+  }
+}
+
+void VFD::letter(int g, char whichLetter) {
+  for (int i = 0; i < _numGridPins; i++) {
+    if (i == g) {
+      digitalWrite(_gridPins[i], LOW);
+    } else {
+      digitalWrite(_gridPins[i], HIGH);
+    }
+  }
+  int tempLetter = ' ';
+  switch (whichLetter) {
+    case ' ':
+      tempLetter = 0;
+      break;
+    case 'a':
+      tempLetter = 1;
+      break;
+    case 'b':
+      tempLetter = 2;
+      break;
+    case 'c':
+      tempLetter = 3;
+      break;
+    case 'd':
+      tempLetter = 4;
+      break;
+    case 'e':
+      tempLetter = 5;
+      break;
+    case 'f':
+      tempLetter = 6;
+      break;
+    case 'g':
+      tempLetter = 7;
+      break;
+    case 'h':
+      tempLetter = 8;
+      break;
+    case 'i':
+      tempLetter = 9;
+      break;
+    case 'j':
+      tempLetter = 10;
+      break;
+    case 'k':
+      tempLetter = 11;
+      break;
+    case 'l':
+      tempLetter = 12;
+      break;
+    case 'm':
+      tempLetter = 13;
+      break;
+    case 'n':
+      tempLetter = 14;
+      break;
+    case 'o':
+      tempLetter = 15;
+      break;
+    case 'p':
+      tempLetter = 16;
+      break;
+    case 'q':
+      tempLetter = 17;
+      break;
+    case 'r':
+      tempLetter = 18;
+      break;
+    case 's':
+      tempLetter = 19;
+      break;
+    case 't':
+      tempLetter = 20;
+      break;
+    case 'u':
+      tempLetter = 21;
+      break;
+    case 'v':
+      tempLetter = 22;
+      break;
+    case 'w':
+      tempLetter = 23;
+      break;
+    case 'x':
+      tempLetter = 24;
+      break;
+    case 'y':
+      tempLetter = 25;
+      break;
+    case 'z':
+      tempLetter = 26;
+      break;
+    case '0':
+      tempLetter = 27;
+      break;
+    case '1':
+      tempLetter = 28;
+      break;
+    case '2':
+      tempLetter = 29;
+      break;
+    case '3':
+      tempLetter = 30;
+      break;
+    case '4':
+      tempLetter = 31;
+      break;
+    case '5':
+      tempLetter = 32;
+      break;
+    case '6':
+      tempLetter = 33;
+      break;
+    case '7':
+      tempLetter = 34;
+      break;
+    case '8':
+      tempLetter = 35;
+      break;
+    case '9':
+      tempLetter = 36;
+      break;
+    default:
+      tempLetter = 0;
+      break;
+  }
+  for (unsigned int i = 0; i < sizeof(alphanum[0]) / sizeof(alphanum[0][0]); i++) {
+    digitalWrite(_segPins[i], alphanum[tempLetter][i]);
+  }
+  delay(3);
 }
