@@ -230,7 +230,9 @@ void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
   }
 }
 
-void VFD::letter(int g, char whichLetter) {
+void VFD::letter(int g, String whichLetter) {
+  whichLetter = whichLetter.toLowerCase();
+  char l = whichLetter[0];
   for (int i = 0; i < _numGridPins; i++) {
     if (i == g) {
       digitalWrite(_gridPins[i], LOW);
@@ -239,7 +241,7 @@ void VFD::letter(int g, char whichLetter) {
     }
   }
   int tempLetter = ' ';
-  switch (whichLetter) {
+  switch (l) {
     case ' ':
       tempLetter = 0;
       break;

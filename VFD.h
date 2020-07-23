@@ -17,7 +17,7 @@ public:
 	void segment(int g, int s);
 	void segment(int g, int s, int duration);
 	void crazyEights(int speed);
-	void letter(int g, char whichletter);
+	void letter(int g, String whichletter);
 	void message(String text, byte firstGrid, byte lastGrid, int waitTime);
 	void scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime);
 private:
