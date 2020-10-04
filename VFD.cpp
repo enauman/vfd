@@ -28,44 +28,44 @@ Create instance of display, arguments:
 4) array of grid pins, rightmost digit first
 5) (optional) number of segments to be used for numbers (7 or 9)
 */
-VFD::VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins)
+VFD::VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins)
 {
   _numSegPins = numSegPins;
   _segPins = segPins;
   _numGridPins = numGridPins;
   _gridPins = gridPins;
   _segsForNumbers = 7;
-  for(int i = 0; i<_numSegPins; i++) {
+  for(byte i = 0; i<_numSegPins; i++) {
     pinMode(_segPins[i],OUTPUT);
   }
-  for(int i = 0; i<_numGridPins; i++) {
+  for(byte i = 0; i<_numGridPins; i++) {
     pinMode(_gridPins[i],OUTPUT);
   }
   off(0);
 }
 
-VFD::VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins, const int segsForNumbers)
+VFD::VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins, const byte segsForNumbers)
 {
   _numSegPins = numSegPins;
   _segPins = segPins;
   _numGridPins = numGridPins;
   _gridPins = gridPins;
   _segsForNumbers = segsForNumbers;
-  for(int i = 0; i<_numSegPins; i++) {
+  for(byte i = 0; i<_numSegPins; i++) {
     pinMode(_segPins[i],OUTPUT);
   }
-  for(int i = 0; i<_numGridPins; i++) {
+  for(byte i = 0; i<_numGridPins; i++) {
     pinMode(_gridPins[i],OUTPUT);
   }
   off(0);
 }
 
-void VFD::segment(int g, int s) {
+void VFD::segment(byte g, byte s) {
     digitalWrite(_gridPins[g], LOW);
     digitalWrite(_segPins[s], LOW);
 }
 
-void VFD::segment(int g, int s, int duration) {
+void VFD::segment(byte g, byte s, int duration) {
   off(0);
   digitalWrite(_gridPins[g], LOW);
   digitalWrite(_segPins[s], LOW);
@@ -83,8 +83,8 @@ void VFD::on(int duration)
 {
   int multiplexDuration = 3;
   for(int j = 0; j<duration / (multiplexDuration * _numGridPins); j++) {
-    for (int i = 0; i < _numGridPins; i++) {
-      for (int k = 0; k < _numSegPins; k++) {
+    for (byte i = 0; i < _numGridPins; i++) {
+      for (byte k = 0; k < _numSegPins; k++) {
         segment(i, k);
       }
       delay(multiplexDuration);
@@ -95,24 +95,24 @@ void VFD::on(int duration)
 
 void VFD::off(int duration)
 {
-  for (int i = 0; i < _numSegPins; i++) {
+  for (byte i = 0; i < _numSegPins; i++) {
     digitalWrite(_segPins[i], HIGH);
   }
-  for (int i = 0; i < _numGridPins; i++) {
+  for (byte i = 0; i < _numGridPins; i++) {
     digitalWrite(_gridPins[i], HIGH);
   } 
   delay(duration);
 }
 
-void VFD::number(int d, int num) {
-  for (int i = 0; i < _segsForNumbers; i++) {
+void VFD::number(byte d, byte num) {
+  for (byte i = 0; i < _segsForNumbers; i++) {
     if(_segsForNumbers == 9) {
       digitalWrite(_segPins[i], numbers9[num][i]);
     } else {
       digitalWrite(_segPins[i], numbers7[num][i]);
     }
   }
-  for (int j = 0; j < _numGridPins; j++) {
+  for (byte j = 0; j < _numGridPins; j++) {
     if (j == d) {
       digitalWrite(_gridPins[j], LOW);
     } else {
@@ -129,21 +129,21 @@ void VFD::multiDigitNumber(int num) {
 
   if (num < 10) {
     onesChar = numStr[0];
-    ones = int(onesChar - '0');
+    ones = byte(onesChar - '0');
     number(0, ones);
   } else if(num >=10 && num < 100) {
     onesChar = numStr[1];
     tensChar = numStr[0];
-    ones = int(onesChar - '0');
-    tens = int(tensChar - '0');
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
     number(0, ones);
     number(1, tens);
   } else if(num >=100 && num < 1000) {
     onesChar = numStr[2];
     tensChar = numStr[1];
     hundredsChar = numStr[0];
-    ones = int(onesChar - '0');
-    tens = int(tensChar - '0');
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
     hundreds = int(hundredsChar - '0');
     number(0, ones);
     number(1, tens);
@@ -153,8 +153,8 @@ void VFD::multiDigitNumber(int num) {
     tensChar = numStr[2];
     hundredsChar = numStr[1];
     thousandsChar = numStr[0];
-    ones = int(onesChar - '0');
-    tens = int(tensChar - '0');
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
     hundreds = int(hundredsChar - '0');
     thousands = int(thousandsChar - '0');
     number(0, ones);
@@ -167,8 +167,8 @@ void VFD::multiDigitNumber(int num) {
     hundredsChar = numStr[2];
     thousandsChar = numStr[1];
     tenThousandsChar = numStr[0];
-    ones = int(onesChar - '0');
-    tens = int(tensChar - '0');
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
     hundreds = int(hundredsChar - '0');
     thousands = int(thousandsChar - '0');
     tenThousands = int(tenThousandsChar - '0');
@@ -182,18 +182,18 @@ void VFD::multiDigitNumber(int num) {
 
 void VFD::crazyEights(int speed) {
   if(_segsForNumbers == 9) {
-    int segs[] = {0, 1, 8, 7, 6, 4, 3, 2, 8, 7, 6, 5};
-    for (unsigned int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
-      for(int j = 0; j < _numGridPins; j++) {
+    byte segs[] = {0, 1, 8, 7, 6, 4, 3, 2, 8, 7, 6, 5};
+    for (byte i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+      for(byte j = 0; j < _numGridPins; j++) {
         segment(j, segs[i]);
       }
       delay(speed);
       off(1);   
     }   
   } else {
-    int segs[] = {0, 1, 6, 4, 3, 2, 6, 5};
-    for (unsigned int i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
-      for(int j = 0; j < _numGridPins; j++) {
+    byte segs[] = {0, 1, 6, 4, 3, 2, 6, 5};
+    for (byte i = 0; i < sizeof(segs)/sizeof(segs[0]); i++) {
+      for(byte j = 0; j < _numGridPins; j++) {
         segment(j, segs[i]);
       }
       delay(speed);
@@ -203,8 +203,8 @@ void VFD::crazyEights(int speed) {
 }
 
 void VFD::message(String text, byte firstGrid, byte lastGrid, int waitTime) {
-  int len = text.length();
-  int multiplier = lastGrid - firstGrid;
+  byte len = text.length();
+  byte multiplier = lastGrid - firstGrid;
   if (millis() > lastTime + waitTime) {
     messageFragment++;
     lastTime = millis();
@@ -215,7 +215,7 @@ void VFD::message(String text, byte firstGrid, byte lastGrid, int waitTime) {
 
 void VFD::scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime) {
   String newText = "       " + text;
-  int len = newText.length();
+  byte len = newText.length();
   if (millis() > lastTime + waitTime / (lastGrid - firstGrid)) {
     messageFragment++;
     lastTime = millis();
@@ -225,23 +225,26 @@ void VFD::scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitT
 }
 
 void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
-  for(int i = firstGrid; i < lastGrid; i++) {
-    letter(lastGrid - 1 - i, mesg[i]);
+	mesg.toLowerCase();
+  for(byte i = firstGrid; i < lastGrid; i++) {
+  	char let = mesg[i];
+    letter(lastGrid - 1 - i, let);
   }
 }
 
-void VFD::letter(int g, String whichLetter) {
-  whichLetter = whichLetter.toLowerCase();
-  char l = whichLetter[0];
-  for (int i = 0; i < _numGridPins; i++) {
+void VFD::letter(byte g, char whichLetter) {
+  // String tempL = String(whichLetter);
+  // tempL = tempL.toLowerCase();
+  // char l = tempL[0];
+  for (byte i = 0; i < _numGridPins; i++) {
     if (i == g) {
       digitalWrite(_gridPins[i], LOW);
     } else {
       digitalWrite(_gridPins[i], HIGH);
     }
   }
-  int tempLetter = ' ';
-  switch (l) {
+  byte tempLetter = ' ';
+  switch (whichLetter) {
     case ' ':
       tempLetter = 0;
       break;
@@ -357,7 +360,7 @@ void VFD::letter(int g, String whichLetter) {
       tempLetter = 0;
       break;
   }
-  for (unsigned int i = 0; i < sizeof(alphanum[0]) / sizeof(alphanum[0][0]); i++) {
+  for (byte i = 0; i < sizeof(alphanum[0]) / sizeof(alphanum[0][0]); i++) {
     digitalWrite(_segPins[i], alphanum[tempLetter][i]);
   }
   delay(3);
