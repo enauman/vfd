@@ -7,31 +7,31 @@ class VFD
 {
 
 public:
-	VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins, const int segsForNumbers);
-	VFD(const int numSegPins, const int * segPins,const int numGridPins, const int * gridPins);
+	VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins, const byte segsForNumbers);
+	VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins);
 	void on(int duration);
 	void off(int duration);
 	void blink(int duration);
-	void number(int g, int num);
+	void number(byte g, byte num);
 	void multiDigitNumber(int num);
-	void segment(int g, int s);
-	void segment(int g, int s, int duration);
+	void segment(byte g, byte s);
+	void segment(byte g, byte s, int duration);
 	void crazyEights(int speed);
-	void letter(int g, String whichletter);
+	void letter(byte g, char whichletter);
 	void message(String text, byte firstGrid, byte lastGrid, int waitTime);
 	void scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime);
 private:
 	void messageSegment(String mesg, byte firstGrid, byte lastGrid);
-	int _numSegPins;
-	const int * _segPins;
-	int _numGridPins;
-	const int * _gridPins;
-	int _segsForNumbers;
-	int messageFragment = 0;
+	byte _numSegPins;
+	const byte * _segPins;
+	byte _numGridPins;
+	const byte * _gridPins;
+	byte _segsForNumbers;
+	byte messageFragment = 0;
 	//for timer
 	int waitTime = 1000;
 	double lastTime = 0;
-	const int numbers7[10][7] = {
+	const byte PROGMEM numbers7[10][7] = {
 	  {0, 0, 0, 0, 0, 0, 1},//0
 	  {1, 0, 0, 1, 1, 1, 1},//1
 	  {0, 0, 1, 0, 0, 1, 0},//2
@@ -43,7 +43,7 @@ private:
 	  {0, 0, 0, 0, 0, 0, 0},//8
 	  {0, 0, 0, 0, 1, 0, 0}//9
 	};
-	const int numbers9[10][9] = {
+	const byte PROGMEM numbers9[10][9] = {
 	  {0, 0, 0, 0, 0, 0, 1, 1, 1},//0
 	  {1, 0, 0, 1, 1, 1, 1, 1, 1},//1
 	  {0, 0, 1, 0, 0, 1, 0, 0, 0},//2
@@ -55,7 +55,7 @@ private:
 	  {0, 0, 0, 0, 0, 0, 0, 0, 0},//8
 	  {0, 0, 0, 0, 1, 0, 0, 0, 0}//9
 	};
-	const int alphanum[37][15] {
+	const byte PROGMEM alphanum[37][15] {
 	  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, //space
 	  {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1}, //a
 	  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},  //b
