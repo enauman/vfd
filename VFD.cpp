@@ -82,7 +82,9 @@ void VFD::blink(int duration) {
 void VFD::on(int duration)
 {
   int multiplexDuration = 3;
-  for(int j = 0; j<duration / (multiplexDuration * _numGridPins); j++) {
+  int dur = duration / (multiplexDuration * _numGridPins);
+  if(dur < 1) dur = 1;
+  for(int j = 0; j<dur; j++) {
     for (byte i = 0; i < _numGridPins; i++) {
       for (byte k = 0; k < _numSegPins; k++) {
         segment(i, k);
