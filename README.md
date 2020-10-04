@@ -15,10 +15,10 @@ Now create the digit and segment data that will be passed to the object instance
   <img src="images/7segvfd.jpeg" width="400"><br />
   This dislay is only slightly non-standard because of the additional segments for the colon, and the lines above and below the digits.
   <pre>
-	const int NUM_SEG_PINS = 9;
-	const int NUM_GRID_PINS = 5;
-	const int segments[] = {8,7,6,5,4,3,2, A1, A0};
-	const int grids[] = {13, 12, 11, 10, 9};
+	const byte NUM_SEG_PINS = 9;
+	const byte NUM_GRID_PINS = 5;
+	const byte segments[] = {8,7,6,5,4,3,2, A1, A0};
+	const byte grids[] = {13, 12, 11, 10, 9};
 	VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids);
   </pre>
   <br />
@@ -66,12 +66,12 @@ With segments in the above arrangement you can display alphanumeric messages usi
   <code>disp.on(int duration)</code>: all segments on, multiplexed across all grids for even power distribution.<br />
 	<code>disp.off(int duration)</code>; all digits and segments set against LED bias<br />
 	<code>disp.blink(int duration)</code>; alternates on and off for duration passed as argument<br />
-	<code>disp.segment(int g, int s)</code>; Turn on segment specified (but does not turn it off).<br />
-	<code>disp.segment(int g, int s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
-	<code>disp.number(int g, int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
+	<code>disp.segment(byte g, byte s)</code>; Turn on segment specified (but does not turn it off).<br />
+	<code>disp.segment(byte g, byte s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
+	<code>disp.number(byte g, byte num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
 	<code>disp.multiDigitNumber(int num)</code>; If segments are sequenced according to conventional number segment mapping (see above) and digits are sequenced right to left, will display integers up to 99999, right justified. Multiplexed, 5 ms per digit. Note this can only work if the digit grids are adjacent. In the above example VFD the colon grid messes up 3- or more digit numbers.<br />
 	<code>disp.crazyEights(int speed)</code>; Run an 8 pattern of segments on all digits, if segments are sequenced according to conventional number segment mapping (see above). This will work on the 9-segment number display option mentioned above as well if you add '9' as the 5th argument to the display object instance.<br />
-	<code>disp.letter(int g, String whichLetter)</code>; Display a letter, a-z, in grid specified. All letters displayed as upper case. <br />
+	<code>disp.letter(byte g, String whichLetter)</code>; Display a letter, a-z, in grid specified. All letters displayed as upper case. <br />
 	<code>disp.message(String text, byte firstGrid, byte lastGrid, int waitTime)</code>; Display a string comprised of a-z and 0-9, overflow characters will be separated into substrings which will alternate blinking pattern, blinking speed defined with waitTime. Required firstGrid and lastGrid args define grid range (right and left), inclusive, to use.<br />
 	<code>disp.scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitTime)</code>; Display a string comprised of a-z and 0-9, scrolling right to left, scrolling speed defined with waitTime. Required firstGrid and lastGrid args define grid range (right and left), inclusive, to use.<br />
 	
