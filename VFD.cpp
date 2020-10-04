@@ -227,9 +227,9 @@ void VFD::scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitT
 }
 
 void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
-	mesg.toLowerCase();
+  mesg.toLowerCase();
   for(byte i = firstGrid; i < lastGrid; i++) {
-  	char let = mesg[i];
+    char let = mesg[i];
     letter(lastGrid - 1 - i, let);
   }
 }
