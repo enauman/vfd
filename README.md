@@ -37,7 +37,7 @@ Now create the digit and segment data that will be passed to the object instance
 ## 9-segment numbers option
 <p>When you create the display object you can add a 5th argument for numbers to use 9 segments as with this type of display:</p>
 <img src="images/IMG_6037.jpg" width="400"><br />
-<pre>const int numberSegments = 9; 
+<pre>const byte numberSegments = 9; 
 VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br />
 As with 7-segment configuration, first 9 pins in the segment pins array should be in the following order:<br />
   <pre>
@@ -48,7 +48,7 @@ As with 7-segment configuration, first 9 pins in the segment pins array should b
      D
      </pre>
  If no 5th argument is given the display object defaults to a 7-segment number configuration, but you can also add 7 as a 5th argument:<br />
- <pre>const int numberSegments = 7; 
+ <pre>const byte numberSegments = 7; 
 VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids, numberSegments);</pre><br />
 
 ## Alphanumeric characters for "star", or 15-segment digits
