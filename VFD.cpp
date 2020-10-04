@@ -235,9 +235,6 @@ void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
 }
 
 void VFD::letter(byte g, char whichLetter) {
-  // String tempL = String(whichLetter);
-  // tempL = tempL.toLowerCase();
-  // char l = tempL[0];
   for (byte i = 0; i < _numGridPins; i++) {
     if (i == g) {
       digitalWrite(_gridPins[i], LOW);
