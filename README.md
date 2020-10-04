@@ -22,7 +22,7 @@ Now create the digit and segment data that will be passed to the object instance
 	VFD disp(NUM_SEG_PINS, segments, NUM_GRID_PINS, grids);
   </pre>
   <br />
-  In the above, variables are declared for the number of segment and grid pins, and the pin sequence for the segments and grid arrays are constructed as follows:<br />
+  In the above, variables are declared for the number of segment and grid pins (NOTE byte data type), and the pin sequence for the segments and grid arrays are constructed as follows:<br />
   1) If numbers are possible and desired, sequence the segment pins in order for the first 7 pins to display the 7 conventional segments for a number digit, that is:
   <pre>
      A<br />
