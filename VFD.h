@@ -9,7 +9,7 @@ class VFD
 public:
 	VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins, const byte segsForNumbers);
 	VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, const byte * gridPins);
-	void on(int duration);
+	void on();
 	void off(int duration);
 	void blink(int duration);
 	void number(byte g, byte num);
@@ -28,9 +28,13 @@ private:
 	const byte * _gridPins;
 	byte _segsForNumbers;
 	byte messageFragment = 0;
-	//for timer
-	int waitTime = 1000;
+	//for text functions
+	int waitTime = 0;
 	double lastTime = 0;
+	//for blink
+	double lastChange = 0;
+	bool isOff = false;
+
 	const byte PROGMEM numbers7[10][7] = {
 	  {0, 0, 0, 0, 0, 0, 1},//0
 	  {1, 0, 0, 1, 1, 1, 1},//1
