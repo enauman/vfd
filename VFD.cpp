@@ -60,6 +60,38 @@ VFD::VFD(const byte numSegPins, const byte * segPins,const byte numGridPins, con
   off(0);
 }
 
+void VFD::on()
+{
+  for(byte k=0; k<_numGridPins; k++) {
+    for (byte i = 0; i < _numSegPins; i++) {
+      segment(k, i);
+    }
+  }
+}
+
+void VFD::off(int duration)
+{
+  for (byte i = 0; i < _numSegPins; i++) {
+    digitalWrite(_segPins[i], HIGH);
+  }
+  for (byte i = 0; i < _numGridPins; i++) {
+    digitalWrite(_gridPins[i], HIGH);
+  } 
+  delay(duration);
+}
+
+void VFD::blink(int duration) {
+  if(isOff) {
+    off(1);
+  } else {
+    on();
+  }
+  if(millis() > lastChange + duration) {
+    isOff = !isOff;
+    lastChange = millis();
+  }
+}
+
 void VFD::segment(byte g, byte s) {
     digitalWrite(_gridPins[g], LOW);
     digitalWrite(_segPins[s], LOW);
@@ -72,38 +104,6 @@ void VFD::segment(byte g, byte s, int duration) {
   delay(duration);
   digitalWrite(_gridPins[g], HIGH);
   digitalWrite(_segPins[s], HIGH);
-}
-
-void VFD::blink(int duration) {
-  on(duration);
-  off(duration);
-}
-
-void VFD::on(int duration)
-{
-  int multiplexDuration = 3;
-  int dur = duration / (multiplexDuration * _numGridPins);
-  if(dur < 1) dur = 1;
-  for(int j = 0; j<dur; j++) {
-    for (byte i = 0; i < _numGridPins; i++) {
-      for (byte k = 0; k < _numSegPins; k++) {
-        segment(i, k);
-      }
-      delay(multiplexDuration);
-      off(0);
-    } 
-  } 
-}
-
-void VFD::off(int duration)
-{
-  for (byte i = 0; i < _numSegPins; i++) {
-    digitalWrite(_segPins[i], HIGH);
-  }
-  for (byte i = 0; i < _numGridPins; i++) {
-    digitalWrite(_gridPins[i], HIGH);
-  } 
-  delay(duration);
 }
 
 void VFD::number(byte d, byte num) {
@@ -227,9 +227,9 @@ void VFD::scrollingMessage(String text, byte firstGrid, byte lastGrid, int waitT
 }
 
 void VFD::messageSegment(String mesg, byte firstGrid, byte lastGrid) {
-  mesg.toLowerCase();
+	mesg.toLowerCase();
   for(byte i = firstGrid; i < lastGrid; i++) {
-    char let = mesg[i];
+  	char let = mesg[i];
     letter(lastGrid - 1 - i, let);
   }
 }
