@@ -64,9 +64,9 @@ With segments in the above arrangement you can display alphanumeric messages usi
    </pre>
 	
   ## Useful functions
-  <code>disp.on(int duration)</code>: all segments on, multiplexed across all grids for even power distribution.<br />
-	<code>disp.off(int duration)</code>; all digits and segments set against LED bias<br />
-	<code>disp.blink(int duration)</code>; alternates on and off for duration passed as argument<br />
+  <code>disp.on()</code>: all segments on, all grids on.<br />
+	<code>disp.off(int duration)</code>; all digits and segments off<br />
+	<code>disp.blink(int duration)</code>; alternates on and off for duration passed as argument, non-blocking<br />
 	<code>disp.segment(byte g, byte s)</code>; Turn on segment specified (but does not turn it off).<br />
 	<code>disp.segment(byte g, byte s, int duration)</code>; Turn on segment specified on digit specified for given duration in ms.<br />
 	<code>disp.number(byte g, byte num)</code>; If segments are sequenced according to conventional number segment mapping (see above) will display number 0-9 on digit specified. On for 5 ms.<br />
