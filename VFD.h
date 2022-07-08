@@ -14,6 +14,7 @@ public:
 	void blink(int duration);
 	void number(byte g, byte num);
 	void multiDigitNumber(int num);
+	void multiDigitNumber(byte g, int num);
 	void segment(byte g, byte s);
 	void segment(byte g, byte s, int duration);
 	void crazyEights(int speed);
