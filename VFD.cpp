@@ -182,6 +182,64 @@ void VFD::multiDigitNumber(int num) {
   }
 }
 
+void VFD::multiDigitNumber(byte g, int num) {
+  char onesChar, tensChar, hundredsChar, thousandsChar, tenThousandsChar;
+  int ones, tens, hundreds, thousands, tenThousands;
+  String numStr = String(num);
+
+  if (num < 10) {
+    onesChar = numStr[0];
+    ones = byte(onesChar - '0');
+    number(g, ones);
+  } else if(num >=10 && num < 100) {
+    onesChar = numStr[1];
+    tensChar = numStr[0];
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
+    number(g, ones);
+    number(g+1, tens);
+  } else if(num >=100 && num < 1000) {
+    onesChar = numStr[2];
+    tensChar = numStr[1];
+    hundredsChar = numStr[0];
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
+    hundreds = int(hundredsChar - '0');
+    number(g, ones);
+    number(g+1, tens);
+    number(g+2, hundreds);
+  } else if(num >= 1000 && num < 10000) {
+    onesChar = numStr[3];
+    tensChar = numStr[2];
+    hundredsChar = numStr[1];
+    thousandsChar = numStr[0];
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
+    hundreds = int(hundredsChar - '0');
+    thousands = int(thousandsChar - '0');
+    number(g, ones);
+    number(g+1, tens);
+    number(g+2, hundreds);
+    number(g+3, thousands);
+  } else {
+    onesChar = numStr[4];
+    tensChar = numStr[3];
+    hundredsChar = numStr[2];
+    thousandsChar = numStr[1];
+    tenThousandsChar = numStr[0];
+    ones = byte(onesChar - '0');
+    tens = byte(tensChar - '0');
+    hundreds = int(hundredsChar - '0');
+    thousands = int(thousandsChar - '0');
+    tenThousands = int(tenThousandsChar - '0');
+    number(g, ones);
+    number(g+1, tens);
+    number(g+2, hundreds);
+    number(g+3, thousands);
+    number(g+4, tenThousands);  
+  }
+}
+
 void VFD::crazyEights(int speed) {
   if(_segsForNumbers == 9) {
     byte segs[] = {0, 1, 8, 7, 6, 4, 3, 2, 8, 7, 6, 5};
