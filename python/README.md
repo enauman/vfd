@@ -42,3 +42,6 @@ I've only done used this with a Raspberry Pi 5 with Debian release 13 (trixie). 
     display.letter(g, letter): Display a letter as a string on a given grid(g).
   </li>
 </ul>
+<p>
+  <img src="../images/IMG_6351.JPG" width="500">
+</p>
