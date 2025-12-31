@@ -6,6 +6,10 @@ With this library I am trying to provide some shortcuts to programming any vacuu
 Now available a <a href="https://github.com/enauman/vfd/tree/master/python">Python version</a> for use on a Raspberry Pi circuit.
 ## Where to get them
 VFDs can be found in common discarded appliances such as microwaves and DVD/VCR players, and electronics. <a href="https://metatek.blogspot.com/2020/01/vacuum-fluorescent-display-adventures.html" target="_blank">See this tutorial</a> for tips on circuitry.
+## Circuit
+<p>Connecting a microcontroller to a display requires a ~3V circuit to power the filament, a ~21V circuit to power the grids and segments, and a transistor array also connected to each grid and segment to allow the microcontroller to turn them on and off (turning a grid or segment on is done by setting the pin LOW and turning it off by setting it HIGH.)</p>
+<p><a href="https://metatek.blogspot.com/2020/01/vacuum-fluorescent-display-adventures.html">This post</a> describes my initial project using an Adafruit Metro Mini 5V.</p>
+<p>More detail about how I've been making the circuits most recently can be found here.</p>
 ## Usage
 <b>Include the library</b><br />
 <code>
