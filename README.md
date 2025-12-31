@@ -1,7 +1,7 @@
 # VFD
 Arduino library for vacuum fluorescent displaysd, such as found in electronics and appliances.<br />
 With this library I am trying to provide some shortcuts to programming any vacuum fluorescent appliance/electronics display provided it is multiplexed, that is, its circuit has several grid pins to address specific digits with individual pins for segments across digits. <br />
-(NOTE functions using alpha characters are not space efficient and may max out memory use or cause instability on some boards: Adafruit Metro Mini and Arduino UNO are affected in my experience. I'm working on optimizing to save space.)
+(NOTE functions using alpha characters are not space efficient and may max out memory use or cause instability on some boards: Adafruit Metro Mini and Arduino UNO are affected in my experience. )
 ## Python version
 Now available a <a href="https://github.com/enauman/vfd/tree/master/python">Python version</a> for use on a Raspberry Pi circuit.
 ## Where to get them
