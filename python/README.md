@@ -1,6 +1,8 @@
 # Python version
 Requirement: gpiozero library<br />
 See use of gpiozero in virtual environment re pin factory error, solutions <a href="https://raspberrypi.stackexchange.com/questions/148817/raspi-4-bookworm-gpio-issues-using-gpiozero">here</a> 
+## Microcontrollers
+I've only done used this with a Raspberry Pi 5 with Debian release 13 (trixie). Could it be done with a Raspberry Pi Pico? 
 ## Functions
 <ul>
   <li>
